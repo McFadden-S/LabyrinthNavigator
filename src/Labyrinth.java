@@ -48,7 +48,7 @@
             int[][] l = new int[row][column];
             
             for(int i = 0; i<block.length; i++){
-                l[block[i][0]][block[i][1]] = -1;
+                l[block[i][0]-1][block[i][1]-1] = -1;
             }//end of for loop
             
             return l;
