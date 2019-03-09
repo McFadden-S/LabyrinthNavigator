@@ -34,7 +34,7 @@
          
             lab = builder(row, column, blocks);
             map = mapMaker(lab);
-            //path = pathfinder(lab); 
+            path = pathfinder(lab); 
         }
         
  	// ********** Calculators **********
@@ -83,7 +83,62 @@
             return map;
         }//end of mapMaker
         
+        /*
+        Purpose: finds number of paths through the maze by working backwards 
+                 and dynamically adds the paths of each position to the table
+        Input: the table of labyrinth(int[][])
+        Output: returns number of paths(int)
+        */
+        private int pathfinder(int[][] l){
+            int paths = 0;
+            int temp1 = 0;
+            int temp2 = 0;
+            
+            
+            for(int i = l.length-1; i>=0; i--){
+                for(int j = l[0].length-1; j>=0; j--){
+                    if(l[i][j]!=-1){
+                        if(i+1!=l.length && j+1!=l[0].length){
+                            temp1 = add(l[i+1][j]);
+                            temp2 = add(l[i][j+1]);
+                        }//end of if not last row and not last column
+                        else if(i+1!=l.length){
+                            temp1 = add(l[i+1][j]);
+                            temp2 = 0;
+                        }//end of if not last row
+                        else if(j+1!=l[0].length){
+                            temp1 = 0;
+                            temp2 = add(l[i][j+1]);
+                        }//end of if not last column
+                        else{
+                            temp1 = 1;
+                            temp2 = 0;
+                        }//end of else exit
+                        l[i][j] = temp1 + temp2;
+                    }//end of if not blocked
+                    
+                }//end of inner for
+            }//end out of outter for
+            
+            paths = l[0][0];
+            
+            return paths;
+        }//end of pathfinder
         
+        /*
+        Purpose: gets value that should be added zero if blocked, number is not
+        Input: value of square inspected(int)
+        Output: the value to be added
+        */
+        private int add(int n){
+            int temp = 0;
+            
+            if(n!=-1){
+                temp=n;
+            }//end of if not blocked
+            
+            return temp;
+        }//end of add
         
  	// ********** IO **********
  

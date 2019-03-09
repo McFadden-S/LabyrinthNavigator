@@ -35,6 +35,8 @@ public class Main
             String[] tokens; //variable for seperated input
             String delim = "[ ]+"; //variable for seperating
             
+            int counter =  1;
+            
             int rows, columns;
             int[][] blocks;
             
@@ -80,16 +82,18 @@ public class Main
                     }//end of for loop
                     
                     lab = new Labyrinth(rows, columns, blocks);
+                    System.out.println("\nLabyrinth: " + counter);
+                    System.out.println("\n" + lab.map + "\nPaths: " + lab.path);
+                    System.out.println("\n***********************************");
                     
-                    System.out.println("\n" + lab.map + "\n");
-                    
+                    counter++;
                     strin = in.readLine();
                 }
             }//end of if no error
 
 	// ***** closing message *****
 	
-		System.out.println("end of processing");
+		System.out.println("\nend of processing");
 	
 	}  // end main	
 }  // end class
